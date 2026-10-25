@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skibidify - Web Player</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231DB954'><path d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.215.353-.674.464-1.027.25-2.812-1.718-6.352-2.107-10.523-1.155-.403.092-.806-.157-.898-.56-.092-.403.157-.806.56-.898 4.567-1.042 8.479-.6 11.638 1.336.353.214.464.674.25 1.027zm1.468-3.265c-.27.44-.848.578-1.288.308-3.22-1.979-8.128-2.552-11.936-1.396-.494.15-1.024-.13-1.174-.624-.15-.494.13-1.024.624-1.174 4.356-1.322 9.776-.68 13.466 1.598.44.27.578.848.308 1.288zm.126-3.41c-3.86-2.292-10.228-2.503-13.918-1.383-.593.18-1.222-.162-1.402-.755-.18-.593.162-1.222.755-1.402 4.238-1.286 11.272-1.045 15.696 1.58.533.316.708 1.01.392 1.543-.316.533-1.01.708-1.523.417z'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Global Header / Navigation -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="brand">
+          <svg class="brand-logo" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.215.353-.674.464-1.027.25-2.812-1.718-6.352-2.107-10.523-1.155-.403.092-.806-.157-.898-.56-.092-.403.157-.806.56-.898 4.567-1.042 8.479-.6 11.638 1.336.353.214.464.674.25 1.027zm1.468-3.265c-.27.44-.848.578-1.288.308-3.22-1.979-8.128-2.552-11.936-1.396-.494.15-1.024-.13-1.174-.624-.15-.494.13-1.024.624-1.174 4.356-1.322 9.776-.68 13.466 1.598.44.27.578.848.308 1.288zm.126-3.41c-3.86-2.292-10.228-2.503-13.918-1.383-.593.18-1.222-.162-1.402-.755-.18-.593.162-1.222.755-1.402 4.238-1.286 11.272-1.045 15.696 1.58.533.316.708 1.01.392 1.543-.316.533-1.01.708-1.523.417z"/>
+          </svg>
+          <span class="brand-name">Skibidify</span>
+        </div>
+        <div class="nav-history-buttons">
+          <button class="icon-btn-round nav-history-btn" id="btnHistoryBack" title="Go back">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8.53a.75.75 0 0 1 0-1.06l7.53-7.53a.75.75 0 0 1 1.06 0z"/></svg>
+          </button>
+          <button class="icon-btn-round nav-history-btn" id="btnHistoryForward" title="Go forward">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8 4.97 14.47a.75.75 0 1 0 1.06 1.06l7.53-7.53a.75.75 0 0 0 0-1.06L6.03.47a.75.75 0 0 0-1.06 0z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <div class="search-input-wrapper" id="searchBarContainer">
+          <svg class="search-icon" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06L11.286 12.18A6.75 6.75 0 0 1 .25 7z"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="What do you want to play?" autocomplete="off">
+          <button class="search-clear-btn" id="searchClearBtn" title="Clear search">✕</button>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="badge-premium" id="btnPremiumBadge" title="Skibidify Unlimited Premium Active">
+          <span>✨ Premium Unlocked</span>
+        </button>
+        <button class="btn-pill btn-secondary" id="btnUploadLocal" title="Import Local MP3s">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+            <path d="M8.75 1.75a.75.75 0 0 0-1.5 0v6.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75zM3.5 12.75a.75.75 0 0 0 0 1.5h9a.75.75 0 0 0 0-1.5h-9z"/>
+          </svg>
+          <span>Add Local Music</span>
+        </button>
+        <input type="file" id="localFileInput" accept="audio/*" multiple style="display: none;">
+        
+        <button class="icon-btn-round" id="btnOpenSettings" title="Spotify API Settings">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.86z"/></svg>
+        </button>
+
+        <div class="user-avatar" id="userProfileBtn" title="Account">
+          <span>Z</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <div class="main-container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <!-- Navigation Box -->
+        <nav class="nav-box">
+          <ul class="nav-list">
+            <li class="nav-item active" id="navHome">
+              <button class="nav-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h5v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6h5V7.577l-7.5-4.33zm8.5 5.21v11.543A2 2 0 0 1 19 22H5a2 2 0 0 1-2-2V8.457l8-4.619a2 2 0 0 1 2 0l8 4.619z"/>
+                </svg>
+                <span>Home</span>
+              </button>
+            </li>
+            <li class="nav-item" id="navSearch">
+              <button class="nav-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M10.533 1.27893C5.42321 1.27893 1.27893 5.42321 1.27893 10.533C1.27893 15.6428 5.42321 19.7871 10.533 19.7871C12.8106 19.7871 14.8937 18.9625 16.5135 17.5878L21.463 22.5373C21.7559 22.8302 22.2307 22.8302 22.5236 22.5373C22.8165 22.2444 22.8165 21.7695 22.5236 21.4766L17.5741 16.5271C18.9488 14.9073 19.7734 12.8242 19.7734 10.533C19.7734 5.42321 15.6428 1.27893 10.533 1.27893ZM2.77893 10.533C2.77893 6.25055 6.25055 2.77893 10.533 2.77893C14.8155 2.77893 18.2871 6.25055 18.2871 10.533C18.2871 14.8155 14.8155 18.2871 10.533 18.2871C6.25055 18.2871 2.77893 14.8155 2.77893 10.533Z"/>
+                </svg>
+                <span>Search</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Library Box -->
+        <div class="library-box">
+          <div class="library-header">
+            <button class="library-title-btn" id="btnLibraryTitle">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1.5-.866l-5 3zM16 4.732l4-2.4V20h-4V4.732zM8.5 2.134A1 1 0 0 0 7 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1.5-.866l-5 3zM9 4.732l4-2.4V20H9V4.732z"/>
+              </svg>
+              <span>Your Library</span>
+            </button>
+            <button class="icon-btn-plain" id="btnCreatePlaylist" title="Create playlist or folder">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"/></svg>
+            </button>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="library-filter-chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="playlists">Playlists</button>
+            <button class="chip" data-filter="local">Local Files</button>
+          </div>
+
+          <!-- Library Items List -->
+          <div class="library-list" id="sidebarPlaylists">
+            <!-- Liked Songs pinned item -->
+            <div class="library-item" id="libLikedSongs" data-type="liked">
+              <div class="lib-cover liked-songs-gradient">
+                <svg viewBox="0 0 16 16" fill="white" width="20" height="20">
+                  <path d="M15.724 4.22A4.13 4.13 0 0 0 12.181 2c-1.34 0-2.874.78-3.681 2.05C7.693 2.78 6.16 2 4.819 2a4.13 4.13 0 0 0-3.543 2.22c-1.54 2.566-.156 6.876 5.8 11.038l.924.642.924-.642c5.956-4.162 7.34-8.472 5.8-11.038z"/>
+                </svg>
+              </div>
+              <div class="lib-info">
+                <span class="lib-title">Liked Songs</span>
+                <span class="lib-sub">Playlist • <span id="likedSongsCount">0</span> songs</span>
+              </div>
+            </div>
+
+            <!-- Local Music Files pinned item -->
+            <div class="library-item" id="libLocalTracks" data-type="local">
+              <div class="lib-cover local-music-cover">
+                <svg viewBox="0 0 16 16" fill="white" width="20" height="20">
+                  <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.895 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                  <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM5 13V4h1v9H5z"/>
+                  <path d="M5 4.879l9-2.571v-1.02L5 3.86v1.02z"/>
+                </svg>
+              </div>
+              <div class="lib-info">
+                <span class="lib-title">Your Local Files</span>
+                <span class="lib-sub">Playlist • <span id="localTracksCount">3</span> tracks</span>
+              </div>
+            </div>
+
+            <!-- Dynamic playlist rows will be injected here -->
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Central Content Panel -->
+      <main class="content-view" id="mainContent">
+        <!-- Content gets rendered dynamically based on active view (Home, Search, Playlist) -->
+        <div id="viewContainer"></div>
+      </main>
+
+      <!-- Right Now Playing / Lyrics Side Panel (Collapsible) -->
+      <aside class="right-panel" id="rightPanel">
+        <div class="right-panel-header">
+          <h3 id="rightPanelTitle">Now Playing</h3>
+          <button class="icon-btn-plain" id="btnCloseRightPanel">✕</button>
+        </div>
+        <div class="right-panel-content" id="rightPanelContent">
+          <!-- Big Album Art, Synced Lyrics or Queue -->
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bottom Persistent Spotify Player Bar -->
+    <footer class="player-bar">
+      <!-- Left Track Info -->
+      <div class="player-left">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80" alt="Cover" class="now-playing-thumb" id="playerThumb">
+        <div class="now-playing-meta">
+          <div class="now-playing-title" id="playerTitle">Select a track</div>
+          <div class="now-playing-artist" id="playerArtist">Skibidify</div>
+        </div>
+        <button class="icon-btn-plain btn-like-track" id="playerBtnLike" title="Save to Your Library">
+          <svg viewBox="0 0 16 16" fill="currentColor" class="heart-icon">
+            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center Player Controls -->
+      <div class="player-center">
+        <div class="player-controls">
+          <button class="icon-btn-plain" id="btnShuffle" title="Enable shuffle">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.391a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.939 3.75 13.15.922zM.391 3.5H0V2h.391c1.109 0 2.16.49 2.873 1.34L4.89 5.277l-.979 1.167-1.796-2.14A2.25 2.25 0 0 0 .39 3.5z"/>
+              <path d="m7.5 10.723.98-1.167.957 1.14a2.25 2.25 0 0 0 1.724.804h1.947l-1.017-1.018a.75.75 0 1 1 1.06-1.06l2.788 2.788-2.788 2.788a.75.75 0 1 1-1.06-1.06L13.109 13H11.16a3.75 3.75 0 0 1-2.873-1.34l-.787-.937z"/>
+            </svg>
+          </button>
+          <button class="icon-btn-plain" id="btnPrev" title="Previous">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.576a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>
+          </button>
+          <button class="btn-play-pause-circle" id="btnPlayPause" title="Play">
+            <svg viewBox="0 0 16 16" fill="currentColor" id="playIconSvg">
+              <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>
+            </svg>
+          </button>
+          <button class="icon-btn-plain" id="btnNext" title="Next">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.576a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>
+          </button>
+          <button class="icon-btn-plain" id="btnRepeat" title="Enable repeat">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5z"/></svg>
+          </button>
+        </div>
+
+        <div class="playback-bar">
+          <span class="playback-time" id="timeCurrent">0:00</span>
+          <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressBarFill"></div>
+              <div class="progress-bar-handle" id="progressBarHandle"></div>
+            </div>
+          </div>
+          <span class="playback-time" id="timeDuration">0:00</span>
+        </div>
+      </div>
+
+      <!-- Right Options & Volume Controls -->
+      <div class="player-right">
+        <button class="icon-btn-plain" id="btnToggleNowPlaying" title="Now playing view">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.196 8 6 5.24v5.52L11.196 8z"/><path d="M15.002 1.75A1.75 1.75 0 0 0 13.252 0h-10.5a1.75 1.75 0 0 0-1.75 1.75v12.5c0 .966.783 1.75 1.75 1.75h10.5a1.75 1.75 0 0 0 1.75-1.75V1.75zm-1.75-.25a.25.25 0 0 1 .25.25v12.5a.25.25 0 0 1-.25.25h-10.5a.25.25 0 0 1-.25-.25V1.75a.25.25 0 0 1 .25-.25h10.5z"/></svg>
+        </button>
+        <button class="icon-btn-plain" id="btnToggleLyrics" title="Lyrics">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.479 2.572a.75.75 0 0 1 .521.947l-4 11a.75.75 0 0 1-1.4-.51l4-11a.75.75 0 0 1 .879-.437zM2 3.25a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 2 3.25zm0 4.5a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 2 7.75zm0 4.5a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75z"/></svg>
+        </button>
+        <button class="icon-btn-plain" id="btnToggleQueue" title="Queue">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 5.5v-2zm2.5-1A1 1 0 0 0 2.5 3.5v2A1 1 0 0 0 3.5 6.5h9a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-9z"/></svg>
+        </button>
+        <button class="icon-btn-plain" id="btnEqualizer" title="Equalizer & Audio FX">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2v4H1V2h2zm0 8v4H1v-4h2zm2-2H0V6h5v2zm6-6v6H9V2h2zm0 10v2H9v-2h2zm2-4H8V6h5v2zm4-4v1H15V2h2zm0 5v7h-2V7h2zm2-2h-5V3h5v2z"/></svg>
+        </button>
+        <div class="volume-bar-wrapper">
+          <button class="icon-btn-plain" id="btnMute" title="Mute">
+            <svg viewBox="0 0 16 16" fill="currentColor" id="volumeIconSvg">
+              <path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4H0V4.85h2.066l6.925-4a.75.75 0 0 1 .75 0zM12 4a.75.75 0 0 1 .75.75 4.5 4.5 0 0 1 0 6.5.75.75 0 1 1-1.06-1.06 3 3 0 0 0 0-4.38.75.75 0 0 1 .31-.81z"/>
+            </svg>
+          </button>
+          <div class="volume-slider-container" id="volumeSliderContainer">
+            <div class="volume-bar-bg">
+              <div class="volume-bar-fill" id="volumeBarFill" style="width: 80%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="audioPlayer" preload="auto"></audio>
+
+  <!-- Equalizer Modal -->
+  <div class="modal-overlay" id="eqModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Skibidify Equalizer (Pro Studio FX)</h2>
+        <button class="icon-btn-plain" id="btnCloseEq">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="eq-presets">
+          <label>Preset:</label>
+          <select id="eqPresetSelect" class="spotify-select">
+            <option value="flat">Flat</option>
+            <option value="bassBoost">Bass Booster 🔥</option>
+            <option value="trebleBoost">Treble Boost ✨</option>
+            <option value="electronic">Electronic / EDM</option>
+            <option value="rock">Rock / Heavy</option>
+            <option value="vocal">Vocal Clarity</option>
+          </select>
+        </div>
+        <div class="eq-sliders-grid" id="eqSliders">
+          <div class="eq-col">
+            <input type="range" min="-12" max="12" value="0" orient="vertical" class="eq-slider" data-band="0">
+            <span>60Hz</span>
+          </div>
+          <div class="eq-col">
+            <input type="range" min="-12" max="12" value="0" orient="vertical" class="eq-slider" data-band="1">
+            <span>250Hz</span>
+          </div>
+          <div class="eq-col">
+            <input type="range" min="-12" max="12" value="0" orient="vertical" class="eq-slider" data-band="2">
+            <span>1kHz</span>
+          </div>
+          <div class="eq-col">
+            <input type="range" min="-12" max="12" value="0" orient="vertical" class="eq-slider" data-band="3">
+            <span>4kHz</span>
+          </div>
+          <div class="eq-col">
+            <input type="range" min="-12" max="12" value="0" orient="vertical" class="eq-slider" data-band="4">
+            <span>16kHz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spotify Developer API Credentials Modal -->
+  <div class="modal-overlay" id="spotifyConfigModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Spotify Official API Settings</h2>
+        <button class="icon-btn-plain" id="btnCloseConfig">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="settings-desc">
+          Connect Skibidify to Spotify's official servers by entering your Spotify Developer app credentials (from <a href="https://developer.spotify.com/dashboard" target="_blank" style="color:#1DB954;">developer.spotify.com</a>).
+        </p>
+        <div class="form-group">
+          <label>Spotify Client ID</label>
+          <input type="text" id="spotifyClientIdInput" class="spotify-input" placeholder="e.g. 4a8b...12">
+        </div>
+        <div class="form-group">
+          <label>Spotify Client Secret</label>
+          <input type="password" id="spotifyClientSecretInput" class="spotify-input" placeholder="e.g. 9f1c...88">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-pill btn-primary" id="btnSaveSpotifyConfig">Save & Connect</button>
+        </div>
+        <div class="status-box" id="spotifyConfigStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

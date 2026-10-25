@@ -1,0 +1,15 @@
+services:
+  skibidify:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skibidify_app
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./music:/app/music
+    environment:
+      - PORT=8888
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID:-}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET:-}
+    restart: unless-stopped
